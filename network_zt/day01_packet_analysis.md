@@ -1,0 +1,49 @@
+# Day 01 · Wireshark와 패킷 분석 기초
+
+날짜: 2026-10-12
+
+## 1. 오늘 한 일
+- 기존에 설치된 Wireshark 실행 확인
+- 화면 배율 문제 해결
+- `network_zt` 폴더 생성
+- `pwd` 명령어로 현재 폴더 위치 확인
+- `tasklist`, `grep`, 파이프(`|`) 명령어 학습
+- Wireshark와 Npcap의 역할 이해
+
+## 2. 새롭게 배운 개념
+
+### Wireshark
+네트워크에서 주고받는 패킷을 확인하고 분석하는 프로그램이다.
+
+### 패킷(Packet)
+네트워크를 통해 전송되는 데이터의 작은 단위이다.
+
+### Npcap
+Windows에서 Wireshark가 네트워크 패킷을 캡처할 수 있도록 도와주는 프로그램이다.
+
+### 파이프(`|`)
+앞 명령어의 출력을 뒤 명령어의 입력으로 전달하는 기호이다.
+
+## 3. 직접 실행한 명령어
+
+```bash
+pwd
+tasklist
+tasklist | grep Code
+tasklist | grep code
+```
+
+### 실행 결과
+- `pwd`: 현재 위치가 `network_zt` 폴더인지 확인했다.
+- `tasklist | grep Code`: 여러 항목이 출력되었다.
+- `tasklist | grep code`: 검색 결과가 나오지 않았다.
+
+## 4. 알게 된 점
+`grep`은 기본적으로 대문자와 소문자를 구분한다.
+
+Wireshark는 패킷 분석에 사용하며, Npcap은 패킷 캡처를 가능하게 도와준다.
+
+## 5. 다음에 확인할 것
+- Wireshark에서 실제 패킷 캡처하기
+- IP 주소와 프로토콜 확인하기
+- 캡처한 패킷의 의미 분석하기
