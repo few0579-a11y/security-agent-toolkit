@@ -165,3 +165,4 @@ naming to docker.io/library/my-nginx:1
 - (가) `git status` 를 쳤을 때 빨간 목록에 줄이 몇 개였는지, 그 가운데 `.env` · `.venv` 가 있었는지 적어 주세요.
   - 쓸 내용: ① 빨간 목록의 줄 수 ② .env · .venv 가 있었는지
   - 답:
+      `git status`를 실행했을 때 Untracked files 목록에 총 10개 항목이 표시되었으며, `.env`와 `.venv` 파일은 없었다. 이후 `git add .`로 파일을 추가하고, `git commit`과 `git push`를 실행하여 GitHub에 업로드했다.
