@@ -1,32 +1,17 @@
-import json
-from datetime import datetime
+import json                                                      # JSON 파일을 읽는 모듈을 불러온다
+from datetime import datetime                                    # 글자를 시각으로 바꾸는 데 쓴다
 
-with open("config/exceptions.json", encoding="utf-8") as f:
+with open("config/exceptions.json", encoding="utf-8") as f:      # 예외 파일을 연다
+    EXCEPTIONS = json.load(f)                                    # 예외 딕셔너리들의 목록으로 읽는다
 
-    # EXCEPTIONS : 앞에서 작성한 예외 권한 5건을 불러온 목록
-    EXCEPTIONS = json.load(f)     
-
-# TIME_FORMAT : 날짜와 시각의 형식
-TIME_FORMAT = "%Y-%m-%d %H:%M"
+TIME_FORMAT = "%Y-%m-%d %H:%M"                                   # 만료 시각 글자의 형식
 
 
-# user : 요청한 사용자 / permission : 요청한 권한 / now : 권한을 확인하는 시각
-def find_exception(user, permission, now): # 예외 권한 찾기 함수
-
-    """유효한 예외가 있으면 (True, 예외 번호), 없으면 (False, None)을 리턴한다."""
-
-
-    # 1. EXCEPTIONS에서 예외 exc를 하나씩 꺼낸다
-    for exc in EXCEPTIONS:
-
-    # 2. exc의 user와 permission이 요청과 같은지 확인한다
-        if exc["user"] == user and exc["permission"] == permission:
-    # 3. expires를 날짜·시각으로 변환한다
-            expires = datetime.strptime(exc["expires"], TIME_FORMAT)
-
-    # 4. now가 expires보다 앞이면 True와 예외 번호를 리턴한다
-            if now < expires:
-                return True, exc["id"]
-    # 5. 끝까지 찾지 못했다면 False, None을 리턴한다
-    
-    return False, None
+def find_exception(user, permission, now):                       # 사용자 · "자원:행위" · 지금 시각을 받는 함수
+    """now 시각에 유효한 예외가 있으면 (True, 예외 번호), 없으면 (False, None)을 리턴한다."""
+    for exc in EXCEPTIONS:                                       # 예외를 하나씩 꺼낸다
+        if exc["user"] == user and exc["permission"] == permission:   # 사람과 권한이 같으면
+            expires = datetime.strptime(exc["expires"], TIME_FORMAT)  # 만료 시각을 시각으로 바꾸고
+            if now < expires:                                    # 아직 만료 전이면
+                return True, exc["id"]                           # 유효한 예외와 그 번호를 리턴한다
+    return False, None                                           # 못 찾았으면 없다고 리턴한다
